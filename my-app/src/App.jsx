@@ -10,7 +10,7 @@ import FastFoodList from "./FastFoodList/fastFoodList";
 
 
 function App() {
-    const [loading,setLoading]= useState(false)
+    const [loading,setLoading]= useState(true)
     const [fastFoodItems,setItems]= useState([])
 
    const  fetchData= async(categoryId=null)=>{
@@ -45,8 +45,7 @@ return <FastFoodList fastFoodItems={fastFoodItems}/>
   <div className="wrapper bg-fade-dark">
   <Header> </Header>
   <CategoriList></CategoriList>
-<div className="container mt-4" >
-{renderContent()}
+<div className="container mt-4" >{renderContent()}
 </div>
   </div>
  )

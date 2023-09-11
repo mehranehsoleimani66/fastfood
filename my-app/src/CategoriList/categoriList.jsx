@@ -35,7 +35,7 @@ const [loading , setLoading] = useState(true)
   {
   categories?.map((item)=>(
    <li className="nav-link text-danger" key={item?.id}>
-      <a className="nav-link">{item?.name}</a>
+      <div className="nav-link">{item?.name}</div>
     </li>
   
   ))}

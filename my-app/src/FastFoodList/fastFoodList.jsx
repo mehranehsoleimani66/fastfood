@@ -1,6 +1,8 @@
 const FastFoodList = ({fastFoodItems}) => {
     return ( 
-<div>fastfood</div>
+    <>
+    <p>hello</p>
+    </>
 
      );
 }
