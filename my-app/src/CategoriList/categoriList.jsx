@@ -1,46 +1,58 @@
 import { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "../axios";
+import Loading from "../Loading/loading";
 
 const CategoriList = () => {
 const [categories , setCategories] = useState([])
+const [loading , setLoading] = useState(true)
     useEffect(()=>{
 
         const fetchCategory = async () => {
             try {
-              const response = await axios.get("https://react-mini-projects-api.classbon.com/FoodCategory/categories");
-              setCategories(response.date);
+              const response = await axios.get("/FoodCategory/categories")
+              const {data} = response
+              setCategories(data)
+              setLoading(false);
+            
             } catch (error) {
               console.log(error);
             }
+
           };
         
           fetchCategory();
-        }, []);
-      
-//   if (categories.length === 0) {
-//     return <div>Loading...</div>;
-//   }
-       
-  console.log(categories,'categories')
+        }, []); 
+
+   const renderContent =()=>{
+    if (loading){
+      return <Loading theme ='warning'/>
+     }
+     return (
+      <ul className="nav">
+      <li className="nav-item">
+        <a href="#" className="nav-link">فست فود ها</a>
+     </li>
+  {
+  categories?.map((item)=>(
+   <li className="nav-link text-danger" key={item?.id}>
+      <a className="nav-link">{item?.name}</a>
+    </li>
+  
+  ))}
+  </ul>
+     )
+   }
+   
+ 
     return (
     
     <nav className="container mt-n5">
-        <div className="d-flex align-items-center bg-white  rounded-3 py-4 shadow-lg py-4" style={{height:"80px"}}>
-          <ul className="nav">
-            <li className="nav-item">
-              <a href="#" className="nav-link">فست فود ها</a>
-           </li>
-       {categories?.map((item)=>{
-           <div>{console.log(categories,'llllllllll')}
-          <li className="nav-link text-danger" key={item.id}>
-            <a className="nav-link " href="#">{item?.name}</a>
-          </li>
-          </div>
-            })}
-             </ul>
-
+        <div 
+        className="d-flex align-items-center bg-white  rounded-3 py-4 shadow-lg py-4" 
+        style={{height:"80px"}}>
+        { renderContent()}
         </div>
-    </nav>
-        ) }
+        </nav>
+        );};
  
 export default CategoriList;
