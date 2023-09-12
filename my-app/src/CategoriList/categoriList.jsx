@@ -1,29 +1,14 @@
-import { useEffect, useState } from "react";
-import axios from "../axios";
+// import { useEffect, useState } from "react";
 import Loading from "../Loading/loading";
- import SearchBar from "../SearchBar/searchBar";
+import useAxios from "../useAxios";
 
 const CategoriList = ({filterItems,children}) => {
-const [categories , setCategories] = useState([])
-const [loading , setLoading] = useState(true)
-    useEffect(()=>{
 
-        const fetchCategory = async () => {
-            try {
-              const response = await axios.get("/FoodCategory/categories")
-              const {data} = response
-              setCategories(data)
-              setLoading(false);
-            
-            } catch (error) {
-              console.log(error);
-            }
+const [categories,,loading]= useAxios({
+  url: '/FoodCategory/categories'
+});
 
-          };
-        
-          fetchCategory();
-        }, []); 
-
+  
    const renderContent =()=>{
     if (loading){
       return <Loading theme ='warning'/>
