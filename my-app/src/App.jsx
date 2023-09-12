@@ -13,20 +13,20 @@ import useAxios from "./useAxios";
 
 function App() {
     const [url,setUrl]= useState('/FastFood/list');
-    const [fastFoodItems,,loading]= useAxios({
-        url
-    })
+    const [fastFoodItems, ,loading]= useAxios({
+        url,
+    });
 
    
 const filterItems =(categoryId)=>{
-   setUrl( `/FastFood/list${categoryId?  '?categoryId=' + categoryId:''}`)
+   setUrl( `/FastFood/list${categoryId?  '?categoryId=' + categoryId:''}`);
 }
 
 
 const searchItems = async( term)=>{
     setUrl(`/FastFood/search/${term ? '?term=' + term:''}`)
    
-
+};
 
 const renderContent= ()=>{
  if (loading){
@@ -44,7 +44,7 @@ const renderContent= ()=>{
     )
 }
 return <FastFoodList fastFoodItems={fastFoodItems}/>
-}
+};
 
  return(
     
@@ -57,7 +57,7 @@ return <FastFoodList fastFoodItems={fastFoodItems}/>
 <div className="container mt-4" >{renderContent()}
 </div>
   </div>
- )
-}
+ );
+
 }
 export default App;

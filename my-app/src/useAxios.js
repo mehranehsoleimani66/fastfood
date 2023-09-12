@@ -1,13 +1,13 @@
 
 import { useEffect, useState } from "react";
-import axios from "./axios";
+import axios from 'axios';
 
 
    const instance = axios.create({
-    baseURL:"http://react-mini-projects-api.classbon.com",});
+    baseURL:"https://react-mini-projects-api.classbon.com",});
     
     
-    const useAxios = (axiosParam) => {
+    const useAxios = (axiosParams) => {
     
     const [response,setResponse]= useState(null);
     const [error,setError]= useState('');
@@ -15,15 +15,18 @@ import axios from "./axios";
 
     const  fetchData= async()=>{
         try{
-            setLoading(true);
+            
             const response =await instance.request (axiosParams);
            
-            setLoading(false)
-            setFastFoods(response.data);
+            setResponse(response.data);
+            console.log(response);
         }
          
             catch (error) {
                 console.log(error);
+              }
+             finally {
+                setLoading(false);
               }
          }  
        
@@ -38,6 +41,6 @@ import axios from "./axios";
    
  return [response,error,loading];
      
-}
+};
  
 export default useAxios;

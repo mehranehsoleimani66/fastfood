@@ -1,10 +1,10 @@
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Loading from "../Loading/loading";
 import useAxios from "../useAxios";
 
 const CategoriList = ({filterItems,children}) => {
 
-const [categories,,loading]= useAxios({
+const [categories, ,loading]= useAxios({
   url: '/FoodCategory/categories'
 });
 
